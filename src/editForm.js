@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import {	withRouter } from 'react-router-dom'; 
  
 
-export default class EditForm extends Component {
+class EditForm extends Component {
 
 constructor(props) {
     super(props);
@@ -38,6 +38,7 @@ render () {
   return (
       <form onSubmit={(e) => {
           e.preventDefault();
+          this.props.history.push('/all');
           return  this.props.onEditSubmit(this.state.id,this.state.title,this.state.author,this.state.text,this.state.tags,this.state.url,this.state.status)}}>
           
               <div className="input-group">
@@ -95,7 +96,6 @@ render () {
                      </select>
                 <span className="input-group-btn">
                  <button type="submit" className="btn btn-primary">Submit</button>
-                 {this.props.fire && <Redirect to='/all'/>}
                 </span>
               </div>
   </form>
@@ -103,3 +103,4 @@ render () {
 }
 
  } 
+ export default withRouter(EditForm);

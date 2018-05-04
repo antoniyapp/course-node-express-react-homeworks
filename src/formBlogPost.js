@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
- 
+import {	withRouter } from 'react-router-dom'; 
 
-export default class FormBlogPost extends Component {
+class FormBlogPost extends Component {
 
 constructor(props) {
     super(props)
@@ -37,6 +37,7 @@ render () {
   return (
       <form onSubmit={(e) => {
           e.preventDefault();
+          this.props.history.push('/all');
           return  this.props.onSubmit(this.state.date,this.state.title,this.state.author,this.state.text,this.state.tags,this.state.url,this.state.status)}}>
           
               <div className="input-group">
@@ -101,3 +102,4 @@ render () {
 }
 
  } 
+ export default withRouter(FormBlogPost);
