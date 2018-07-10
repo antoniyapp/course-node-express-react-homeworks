@@ -10,7 +10,7 @@ constructor(props) {
     title: '',
     author:'',
     text:'',
-    tags:[],
+    tags:'',
     url:'',
     status:'active'
   };
@@ -19,16 +19,16 @@ constructor(props) {
 handleInputChange(e){
     const value = e.target.value;
     const name = e.target.name;
-    if(name==='tags'){
-       this.setState({
-      [name]: value.split(/\s,/)
-    });
-    }
-    else {
+    // if(name==='tags'){
+    //    this.setState({
+    //   [name]: value.split(/\s,/)
+    // });
+    // }
+   // else {
        this.setState({
       [name]: value
     });
-    }
+    //}
   
 }
 
@@ -49,6 +49,7 @@ render () {
                   disabled="true"
                   value={this.state.date}
                 />
+                <br />
                 <input
                   type="text"
                   className="form-control"
@@ -57,6 +58,7 @@ render () {
                   onChange={this.handleInputChange}
                   value={this.state.title}
                 />
+                 <br />
                 <input
                   type="text"
                   className="form-control"
@@ -65,6 +67,7 @@ render () {
                   onChange={this.handleInputChange}
                   value={this.state.author}
                 />
+                 <br />
                 <input
                   type="text"
                   className="form-control"
@@ -73,6 +76,7 @@ render () {
                   onChange={this.handleInputChange}
                   value={this.state.text}
                 />
+                 <br />
                 <input
                   type="text"
                   className="form-control"
@@ -81,6 +85,7 @@ render () {
                   onChange={this.handleInputChange}
                   value={this.state.tags}
                 />
+                 <br />
                 <input
                   type="text"
                   className="form-control"
@@ -89,10 +94,12 @@ render () {
                   onChange={this.handleInputChange}
                   value={this.state.url}
                 />
+                 <br />
                  <select name="status"  onChange={this.handleInputChange} >
                      <option value="active">Active</option>
                      <option value="inactive">Inactive</option>
                      </select>
+                      <br />
                 <span className="input-group-btn">
                   <button type="submit" className="btn btn-primary">Submit</button>
                 </span>

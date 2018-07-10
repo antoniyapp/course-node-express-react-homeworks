@@ -1,36 +1,53 @@
 import React, { Component } from 'react';
 import {	withRouter } from 'react-router-dom'; 
- 
+ import axios from 'axios';
 
 class EditForm extends Component {
 
 constructor(props) {
     super(props);
     this.state = {
-    date:props.postToEdit.date ,
-    id:props.postToEdit.id,
-    title:props.postToEdit.title,
-    author:props.postToEdit.author ,
-    text:props.postToEdit.text,
-    tags:props.postToEdit.tags,
-    url:props.postToEdit.url ,
-    status:props.postToEdit.status
+    
   };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.loadPostFromServer=this.loadPostFromServer.bind(this);
 }
+loadPostFromServer = (postID) =>   axios.get('/api/posts/'+postID)
+      .then(({ data: blogpost }) => {
+        console.log("GET" , postID);
+        this.setState({
+          id:blogpost.id,
+          date:blogpost.date ,
+          title:blogpost.title,
+          author:blogpost.author ,
+          text:blogpost.text,
+          tags:blogpost.tags,
+          url:blogpost.url ,
+          status:blogpost.status
+        });
+      })
+      .catch((err) => {
+      
+          console.error(this.props.url, err.response.data);
+        })
+
+componentDidMount = () => {
+    this.loadPostFromServer(this.props.postToEdit);
+  }
+
 handleInputChange(e){
     const value = e.target.value;
     const name = e.target.name;
-    if(name==='tags'){
-       this.setState({
-      [name]: value.split(/\s,/)
-    });
-    }
-    else {
+    // if(name==='tags'){
+    //    this.setState({
+    //   [name]: value.split(/\s,/)
+    // });
+    // }
+    // else {
        this.setState({
       [name]: value
     });
-    }
+    //}
 }
 
 render () {
@@ -90,7 +107,7 @@ render () {
                   onChange={this.handleInputChange}
                   value={this.state.url}
                 />
-                 <select name="status" defaultValue="active">
+                 <select name="status" onChange={this.handleInputChange}>
                      <option value="active">Active</option>
                      <option value="inactive">Inactive</option>
                      </select>

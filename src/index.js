@@ -5,6 +5,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDom.render(
 <Router>
-    <App />
+    <App url='http://localhost:3000/api/posts'/>
  </Router>   ,
 document.getElementById('root'));

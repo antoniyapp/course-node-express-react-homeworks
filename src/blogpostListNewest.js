@@ -1,5 +1,5 @@
 import React from 'react'
-import Text from './text'
+
 
 const BlogpostListNewest = ({filter,blogposts,summaryLength,FilterChange,...rest}) => (
   <div>
@@ -23,9 +23,15 @@ const BlogpostListNewest = ({filter,blogposts,summaryLength,FilterChange,...rest
     .filter(blogpost => filter === 'all' ? true : blogpost.status === filter)
     .map(blogpost =>
      (<li key={blogpost.date}> 
-       <div>Title:{blogpost.title}</div>
-       <Text  text = {blogpost.text} summaryLength ={summaryLength}/>
+       <div className="title">Title:{blogpost.title}</div>
+         <div> 
+         Text: { blogpost.text.substring(0,summaryLength)}
+        </div> 
         <div> Author:{blogpost.author}</div>
+        <div>Tags:{blogpost.tags}</div>
+         <div><img src={blogpost.url} alt=''/>Url:{blogpost.url}</div>
+          <div>Status:{blogpost.Status}</div>
+        <div> Date:{blogpost.date}</div>
        </li>) )
   }
   </ul>
